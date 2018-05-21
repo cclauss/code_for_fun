@@ -1,3 +1,5 @@
+from __future__ import print_function
+
 import httplib2
 import urllib2
 from bs4 import BeautifulSoup, SoupStrainer
@@ -15,8 +17,8 @@ for link in BeautifulSoup(response,"lxml", parse_only=SoupStrainer('a')):
         if 'doc' in link['href']:
             doc_links.append(website+link['href'])
 
-print "Got doc links.."
-print doc_links
+print("Got doc links..")
+print(doc_links)
 
 for i in doc_links:
     try:
@@ -24,13 +26,13 @@ for i in doc_links:
         doc_data = doc.read()
         match = match = re.findall(r'[\w\.-]+@[\w\.-]+', doc_data)
         emails.extend(match)
-        print "done", i
+        print("done", i)
     except Exception as e:
-        print e
+        print(e)
 
-print 'Yo, got all emails'
+print('Yo, got all emails')
 
-print 'writing data in results.txt'
+print('writing data in results.txt')
 with open('results.txt', "w") as f:
     for email in emails:
         f.write(email)
